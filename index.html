@@ -41,7 +41,7 @@
             et arrêter de finir le mois sans comprendre où l'argent est parti.
           </p>
           <div class="cta-row">
-            <a id="whatsappCta" href="https://wa.me/" class="btn btn-primary">Commander sur WhatsApp</a>
+            <a id="whatsappCta" href="#commande" class="btn btn-primary">Commander sur WhatsApp</a>
             <a href="#packs" class="btn btn-secondary">Voir les packs</a>
           </div>
           <ul class="hero-points">
@@ -103,63 +103,46 @@
       </div>
     </section>
 
-    <section id="packs" class="section">
-  <div class="wrap">
-    <p class="eyebrow">Packs</p>
-    <h2>Deux packs simples pour commander sans hésiter</h2>
+   <section class="section" id="packs">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Packs</span>
+      <h2>Choisis ton pack et prépare ta commande</h2>
+      <p>Deux options simples, un mode de paiement clair, une livraison facile à comprendre.</p>
+    </div>
 
-    <div class="pricing-grid">
-      <article class="price-card featured">
-        <h3>Standard</h3>
-        <p class="price">8 000 FCFA</p>
-        <ul>
+    <div class="grid-three">
+      <article class="card feature">
+        <h3>Standard — 8 000 FCFA</h3>
+        <p>Pour commencer simplement et reprendre le contrôle de tes dépenses.</p>
+        <ul class="hero-points">
           <li>Sac planner</li>
           <li>Fiches budget</li>
           <li>Guide Phoenix</li>
         </ul>
-        <a class="btn primary" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20pack%20Standard%20Phoenix%20Budget%20Control">
-          Commander Standard
-        </a>
       </article>
 
-      <article class="price-card">
-        <h3>Premium</h3>
-        <p class="price">12 000 FCFA</p>
-        <ul>
+      <article class="card feature">
+        <h3>Premium — 12 000 FCFA</h3>
+        <p>Pour un suivi plus complet et une meilleure organisation.</p>
+        <ul class="hero-points">
           <li>Sac planner</li>
           <li>Fiches complètes</li>
           <li>Guide Phoenix</li>
           <li>Bonus organisation avancée</li>
         </ul>
-        <a class="btn secondary" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20pack%20Premium%20Phoenix%20Budget%20Control">
-          Commander Premium
-        </a>
       </article>
-    </div>
-  </div>
-</section>
 
-<section id="livraison" class="section">
-  <div class="wrap">
-    <p class="eyebrow">Livraison</p>
-    <h2>Conditions de livraison</h2>
-    <div class="card">
-      <p><strong>Livraison gratuite</strong> pour les 10 premiers clients</p>
-      <p><strong>Adidogomé :</strong> 500 FCFA</p>
-      <p><strong>Lomé :</strong> 1000 FCFA</p>
-      <p><strong>Zones plus loin :</strong> sur discussion (Baguida et autres)</p>
-    </div>
-  </div>
-</section>
-
-<section id="paiement" class="section">
-  <div class="wrap">
-    <p class="eyebrow">Paiement</p>
-    <h2>Modes de paiement</h2>
-    <div class="card">
-      <p>Flooz</p>
-      <p>TMoney</p>
-      <p>Paiement à la livraison selon la zone et la commande</p>
+      <article class="card feature">
+        <h3>Livraison</h3>
+        <ul class="hero-points">
+          <li>Gratuite pour les 10 premiers clients</li>
+          <li>Adidogomé : 500 FCFA</li>
+          <li>Lomé : 1000 FCFA</li>
+          <li>Zones plus loin : sur discussion</li>
+        </ul>
+        <p><strong>Paiement :</strong> Flooz, TMoney ou à la livraison selon la zone.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -199,17 +182,72 @@
     </section>
 
     <section class="section dark" id="commande">
-      <div class="container final-cta">
-        <h2>Prêt à lancer Neoflex Store proprement ?</h2>
-        <p>Personnalise les liens WhatsApp et Instagram, publie sur GitHub Pages, puis commence tes premières ventes.</p>
-        <div class="cta-row">
-          <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
-            Je commande maintenant
-          </a>
-          <a href="https://instagram.com/" class="btn btn-secondary">Ajouter Instagram</a>
+  <div class="container final-cta">
+    <span class="eyebrow">Commande rapide</span>
+    <h2>Prépare ton message WhatsApp en 10 secondes</h2>
+    <p>Choisis ton pack, ton paiement et ton mode de livraison. Le message se génère automatiquement.</p>
+
+    <div class="card" style="max-width: 760px; margin: 24px auto 0; text-align: left;">
+      <div style="display: grid; gap: 16px;">
+        <div>
+          <label for="packSelect"><strong>Pack</strong></label><br />
+          <select id="packSelect" style="width:100%; padding:12px; border-radius:12px; margin-top:8px;">
+            <option value="Standard|8000">Standard — 8 000 FCFA</option>
+            <option value="Premium|12000">Premium — 12 000 FCFA</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="paymentSelect"><strong>Mode de paiement</strong></label><br />
+          <select id="paymentSelect" style="width:100%; padding:12px; border-radius:12px; margin-top:8px;">
+            <option value="Flooz">Flooz</option>
+            <option value="TMoney">TMoney</option>
+            <option value="Paiement à la livraison">Paiement à la livraison</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="deliverySelect"><strong>Livraison</strong></label><br />
+          <select id="deliverySelect" style="width:100%; padding:12px; border-radius:12px; margin-top:8px;">
+            <option value="Livraison gratuite|0">Livraison gratuite (10 premiers clients)</option>
+            <option value="Adidogomé|500">Adidogomé — 500 FCFA</option>
+            <option value="Lomé|1000">Lomé — 1000 FCFA</option>
+            <option value="Zone plus loin|discuter">Zone plus loin — à discuter</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="customerName"><strong>Nom</strong></label><br />
+          <input id="customerName" type="text" placeholder="Ton nom" style="width:100%; padding:12px; border-radius:12px; margin-top:8px;" />
+        </div>
+
+        <div>
+          <label for="customerArea"><strong>Quartier / zone</strong></label><br />
+          <input id="customerArea" type="text" placeholder="Ex : Adidogomé, Agoè, Baguida..." style="width:100%; padding:12px; border-radius:12px; margin-top:8px;" />
+        </div>
+
+        <div>
+          <label for="customerPhone"><strong>Numéro</strong></label><br />
+          <input id="customerPhone" type="text" placeholder="Ton numéro" style="width:100%; padding:12px; border-radius:12px; margin-top:8px;" />
+        </div>
+
+        <div class="card" style="background: rgba(255,255,255,0.04);">
+          <p style="margin:0 0 8px;"><strong>Total estimé :</strong> <span id="totalDisplay">8 000 FCFA</span></p>
+          <p style="margin:0; font-size: 0.95rem; opacity: 0.85;">
+            Pour les zones plus loin, le total final est confirmé sur WhatsApp.
+          </p>
+        </div>
+
+        <div class="cta-row" style="justify-content:flex-start;">
+          <button id="generateWhatsAppBtn" class="btn btn-primary" type="button">
+            Générer le message WhatsApp
+          </button>
+          <a href="#packs" class="btn btn-secondary">Revoir les packs</a>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer class="site-footer">
