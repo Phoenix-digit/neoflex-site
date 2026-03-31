@@ -1,103 +1,167 @@
-const WHATSAPP_NUMBER = "22870613738";// Remplace par ton numéro WhatsApp Business sans + ni espaces
+  const WHATSAPP_NUMBER = '22870613738';
 
-    const packSelect = document.getElementById('packSelect');
-    const paymentSelect = document.getElementById('paymentSelect');
-    const deliverySelect = document.getElementById('deliverySelect');
-    const customerName = document.getElementById('customerName');
-    const customerArea = document.getElementById('customerArea');
-    const customerPhone = document.getElementById('customerPhone');
-    const premiumExpenses = document.getElementById('premiumExpenses');
-    const premiumExpenseField = document.getElementById('premiumExpenseField');
-    const customerNote = document.getElementById('customerNote');
+  const packSelect = document.getElementById('packSelect');
+  const paymentSelect = document.getElementById('paymentSelect');
+  const deliverySelect = document.getElementById('deliverySelect');
+  const customerName = document.getElementById('customerName');
+  const customerArea = document.getElementById('customerArea');
+  const customerPhone = document.getElementById('customerPhone');
+  const premiumExpenses = document.getElementById('premiumExpenses');
+  const premiumExpenseField = document.getElementById('premiumExpenseField');
+  const customerNote = document.getElementById('customerNote');
 
-    const summaryPack = document.getElementById('summaryPack');
-    const summaryPayment = document.getElementById('summaryPayment');
-    const summaryDelivery = document.getElementById('summaryDelivery');
-    const totalDisplay = document.getElementById('totalDisplay');
-    const messagePreview = document.getElementById('messagePreview');
+  const summaryPack = document.getElementById('summaryPack');
+  const summaryPayment = document.getElementById('summaryPayment');
+  const summaryDelivery = document.getElementById('summaryDelivery');
+  const totalDisplay = document.getElementById('totalDisplay');
+  const messagePreview = document.getElementById('messagePreview');
 
-    function formatFcfa(value) {
-      return new Intl.NumberFormat('fr-FR').format(value) + ' FCFA';
+  function formatFcfa(value) {
+    return new Intl.NumberFormat('fr-FR').format(value) + ' FCFA';
+  }
+
+  function togglePremiumField() {
+    if (!packSelect || !premiumExpenseField || !premiumExpenses) return;
+    const [packName] = packSelect.value.split('|');
+    const isPremium = packName === 'Premium';
+    premiumExpenseField.classList.toggle('hidden', !isPremium);
+    if (!isPremium) premiumExpenses.value = '';
+  }
+
+  function buildMessage() {
+    const [packName, packPriceRaw] = packSelect.value.split('|');
+    const [deliveryName, deliveryPriceRaw] = deliverySelect.value.split('|');
+    const payment = paymentSelect.value;
+    const name = customerName.value.trim() || 'À préciser';
+    const area = customerArea.value.trim() || 'À préciser';
+    const phone = customerPhone.value.trim() || 'À préciser';
+    const expenses = premiumExpenses ? premiumExpenses.value.trim() : '';
+    const note = customerNote.value.trim();
+
+    const packPrice = Number(packPriceRaw || 0);
+    const deliveryPrice = deliveryPriceRaw === 'discuter' ? null : Number(deliveryPriceRaw || 0);
+    const total = deliveryPrice === null ? null : packPrice + deliveryPrice;
+
+    summaryPack.textContent = `${packName} — ${formatFcfa(packPrice)}`;
+    summaryPayment.textContent = payment;
+    summaryDelivery.textContent = deliveryPrice === null
+      ? `${deliveryName} — à discuter`
+      : `${deliveryName} — ${formatFcfa(deliveryPrice)}`;
+    totalDisplay.textContent = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
+
+    const lines = [
+      'Bonjour Neoflex Store,',
+      '',
+      'Je souhaite commander le Phoenix Budget Control.',
+      '',
+      `Pack : ${packName} — ${formatFcfa(packPrice)}`,
+      `Paiement : ${payment}`,
+      `Livraison : ${deliveryPrice === null ? deliveryName + ' — à discuter' : deliveryName + ' — ' + formatFcfa(deliveryPrice)}`,
+      `Total estimé : ${total === null ? 'à confirmer sur WhatsApp' : formatFcfa(total)}`,
+      '',
+      `Nom : ${name}`,
+      `Quartier / Zone : ${area}`,
+      `Numéro : ${phone}`
+    ];
+
+    if (packName === 'Premium' && expenses) {
+      lines.push(`Chefs de dépense : ${expenses}`);
     }
 
-    function togglePremiumField() {
-      const [packName] = packSelect.value.split('|');
-      const isPremium = packName === 'Premium';
-
-      premiumExpenseField.classList.toggle('hidden', !isPremium);
-
-      if (!isPremium) {
-        premiumExpenses.value = '';
-      }
+    if (note) {
+      lines.push(`Note : ${note}`);
     }
 
-    function buildMessage() {
-      const [packName, packPriceRaw] = packSelect.value.split('|');
-      const [deliveryName, deliveryPriceRaw] = deliverySelect.value.split('|');
-      const payment = paymentSelect.value;
-      const name = customerName.value.trim() || 'À préciser';
-      const area = customerArea.value.trim() || 'À préciser';
-      const phone = customerPhone.value.trim() || 'À préciser';
-      const expenses = premiumExpenses.value.trim();
-      const note = customerNote.value.trim();
+    lines.push('', 'Je confirme vouloir passer commande.', 'Merci de me confirmer la disponibilité.');
 
-      const packPrice = Number(packPriceRaw || 0);
-      const deliveryPrice = deliveryPriceRaw === 'discuter' ? null : Number(deliveryPriceRaw || 0);
-      const total = deliveryPrice === null ? null : packPrice + deliveryPrice;
+    const message = lines.join('\\n');
+    messagePreview.textContent = message;
+    return message;
+  }
 
-      summaryPack.textContent = `${packName} — ${formatFcfa(packPrice)}`;
-      summaryPayment.textContent = payment;
-      summaryDelivery.textContent = deliveryPrice === null
-        ? `${deliveryName} — à discuter`
-        : `${deliveryName} — ${formatFcfa(deliveryPrice)}`;
-      totalDisplay.textContent = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
+  function openWhatsApp() {
+    const message = buildMessage();
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
 
-      const lines = [
-        'Bonjour Neoflex Store ',
-        '',
-        'Je souhaite commander le Phoenix Budget Control.',
-        '',
-        `Pack : ${packName} — ${formatFcfa(packPrice)}`,
-        `Paiement : ${payment}`,
-        `Livraison : ${deliveryPrice === null ? deliveryName + ' — à discuter' : deliveryName + ' — ' + formatFcfa(deliveryPrice)}`,
-        `Total estimé : ${total === null ? 'à confirmer sur WhatsApp' : formatFcfa(total)}`,
-        '',
-        `Nom : ${name}`,
-        `Quartier / Zone : ${area}`,
-        `Numéro : ${phone}`
-      ];
+  function copyMessage() {
+    const message = buildMessage();
+    navigator.clipboard.writeText(message).then(() => {
+      const button = document.getElementById('copyMessageBtn');
+      const initial = button.textContent;
+      button.textContent = 'Message copié';
+      setTimeout(() => button.textContent = initial, 1800);
+    });
+  }
 
-      if (note) {
-        lines.push(`Note : ${note}`);
-      }
+  const productVideos = [
+    'assets/videos/15.07.01.mp4',
+    'assets/videos/15.07.08.mp4',
+    'assets/videos/15.07.28.mp4',
+    'assets/videos/15.07.29.mp4'
+  ];
 
-      lines.push('', ' Je confirme vouloir passer commande.', 'Merci de me confirmer la disponibilité.');
-
-      const message = lines.join('\n');
-      messagePreview.textContent = message;
-      return message;
+  function shuffleArray(array) {
+    const copy = [...array];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
     }
+    return copy;
+  }
 
-    function openWhatsApp() {
-      const message = buildMessage();
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
+  function initProductCarousel() {
+    const mainVideo = document.getElementById('mainProductVideo');
+    const thumbsContainer = document.getElementById('videoThumbs');
+    if (!mainVideo || !thumbsContainer) return;
 
-    function copyMessage() {
-      const message = buildMessage();
-      navigator.clipboard.writeText(message).then(() => {
-        const button = document.getElementById('copyMessageBtn');
-        const initial = button.textContent;
-        button.textContent = 'Message copié';
-        setTimeout(() => button.textContent = initial, 1800);
+    const orderedVideos = shuffleArray(productVideos);
+
+    function setMainVideo(src) {
+      mainVideo.src = src;
+      mainVideo.load();
+
+      [...thumbsContainer.querySelectorAll('.video-thumb')].forEach((el) => {
+        el.classList.toggle('active', el.dataset.src === src);
       });
     }
 
-    [packSelect, paymentSelect, deliverySelect, customerName, customerArea, customerPhone, customerNote]
-      .forEach((el) => el.addEventListener('input', buildMessage));
+    thumbsContainer.innerHTML = '';
 
-    document.getElementById('generateWhatsAppBtn').addEventListener('click', openWhatsApp);
-    document.getElementById('copyMessageBtn').addEventListener('click', copyMessage);
+    orderedVideos.forEach((src, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'video-thumb';
+      btn.dataset.src = src;
+      btn.innerHTML = `
+        <video muted playsinline preload="metadata">
+          <source src="${src}" type="video/mp4">
+        </video>
+      `;
+      btn.addEventListener('click', () => setMainVideo(src));
+      thumbsContainer.appendChild(btn);
 
-    buildMessage();
+      if (index === 0) {
+        setMainVideo(src);
+      }
+    });
+  }
+
+  [packSelect, paymentSelect, deliverySelect, customerName, customerArea, customerPhone, premiumExpenses, customerNote]
+    .filter(Boolean)
+    .forEach((el) => el.addEventListener('input', buildMessage));
+
+  if (packSelect) {
+    packSelect.addEventListener('change', () => {
+      togglePremiumField();
+      buildMessage();
+    });
+  }
+
+  document.getElementById('generateWhatsAppBtn').addEventListener('click', openWhatsApp);
+  document.getElementById('copyMessageBtn').addEventListener('click', copyMessage);
+
+  togglePremiumField();
+  buildMessage();
+  initProductCarousel();
