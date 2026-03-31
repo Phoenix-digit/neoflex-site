@@ -3,187 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phoenix Budget Control</title>
-  <meta name="description" content="Phoenix Budget Control - Reprends le contrôle de ton argent." />
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-    .wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-    .hero {
-      padding: 56px 24px 32px;
-      text-align: center;
-      background: linear-gradient(180deg, #111111 0%, #0b0b0b 100%);
-    }
-    .logo {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      border-radius: 18px;
-      background: #111;
-      padding: 8px;
-      border: 1px solid #2b2b2b;
-    }
-    h1 {
-      margin: 18px 0 8px;
-      font-size: 2.2rem;
-      color: #ff8c1a;
-    }
-    .subtitle {
-      max-width: 700px;
-      margin: 0 auto 24px;
-      color: #d7d7d7;
-      font-size: 1.05rem;
-    }
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      background: #ff8c1a;
-      color: #111111;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-weight: bold;
-    }
-    .section {
-      padding: 28px 0;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-    .card {
-      background: #141414;
-      border: 1px solid #272727;
-      border-radius: 16px;
-      padding: 18px;
-    }
-    h2 {
-      color: #ff8c1a;
-      margin-bottom: 12px;
-    }
-    .price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #ffb15c;
-    }
-    .note {
-      color: #cfcfcf;
-      font-size: 0.95rem;
-    }
-    .footer {
-      padding: 32px 24px 50px;
-      text-align: center;
-      color: #a9a9a9;
-    }
-    ul {
-      padding-left: 18px;
-      margin: 8px 0 0;
-    }
-  </style>
+  <title>Neoflex Store — Phoenix Budget Control</title>
+  <meta name="description" content="Phoenix Budget Control : kit physique et méthode simple pour reprendre le contrôle de son argent." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <section class="hero">
-    <div class="wrap">
-      <img src="logo.png" alt="Logo Phoenix Budget Control" class="logo" />
-      <h1>Phoenix Budget Control</h1>
-      <p class="subtitle">
-        Reprends le contrôle de ton argent avec un kit physique simple,
-        pratique et pensé pour t’aider à mieux organiser ton budget.
-      </p>
-      <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>Pourquoi ce kit ?</h2>
-      <div class="grid">
-        <div class="card">
-          <strong>Tu gagnes de l’argent</strong>
-          <p>Mais tu ne sais pas toujours où il part.</p>
-        </div>
-        <div class="card">
-          <strong>Tu veux épargner</strong>
-          <p>Mais tu touches souvent à l’argent prévu.</p>
-        </div>
-        <div class="card">
-          <strong>Tu veux un système simple</strong>
-          <p>Sans application compliquée au départ.</p>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Logo Phoenix Budget Control" class="logo" />
+        <div>
+          <div class="brand-top">Neoflex Store</div>
+          <div class="brand-bottom">Phoenix Budget Control</div>
         </div>
       </div>
+      <nav>
+        <a href="#offre">Offre</a>
+        <a href="#methode">Méthode</a>
+        <a href="#packs">Packs</a>
+        <a href="#faq">FAQ</a>
+        <a href="#commande" class="btn btn-outline">Commander</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Nos offres</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="price">Standard — 8 000 FCFA</div>
-          <ul>
-            <li>Sac planner</li>
-            <li>Fiches budget</li>
-            <li>Guide Phoenix</li>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Organisation • Contrôle • Discipline financière</span>
+          <h1>Reprends le contrôle de ton argent avec <span>Phoenix Budget Control</span>.</h1>
+          <p class="lead">
+            Un kit physique élégant + une méthode simple pour suivre tes dépenses, répartir ton budget
+            et arrêter de finir le mois sans comprendre où l'argent est parti.
+          </p>
+          <div class="cta-row">
+            <a id="whatsappCta" href="https://wa.me/" class="btn btn-primary">Commander sur WhatsApp</a>
+            <a href="#packs" class="btn btn-secondary">Voir les packs</a>
+          </div>
+          <ul class="hero-points">
+            <li>Kit physique prêt à utiliser</li>
+            <li>Fiches budget imprimables incluses</li>
+            <li>Guide Phoenix Method inclus</li>
           </ul>
         </div>
-        <div class="card">
-          <div class="price">Premium — 12 000 FCFA</div>
-          <ul>
-            <li>Sac planner</li>
-            <li>Fiches complètes</li>
-            <li>Guide Phoenix</li>
-            <li>Bonus organisation avancée</li>
-          </ul>
+        <div class="card spotlight">
+          <div class="spotlight-inner">
+            <img src="assets/logo.png" alt="Phoenix Budget Control" class="spotlight-logo"/>
+            <h2>Positionnement</h2>
+            <p>Tu ne vends pas un sac. Tu vends un système simple pour reprendre la maîtrise de ses finances.</p>
+            <div class="mini-stats">
+              <div><strong>01</strong><span>Kit</span></div>
+              <div><strong>02</strong><span>Méthode</span></div>
+              <div><strong>03</strong><span>Transformation</span></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Livraison</h2>
-      <div class="card">
-        <p>Gratuite pour les 10 premiers clients</p>
-        <p>Adidogomé : 500 FCFA</p>
-        <p>Lomé : 1000 FCFA</p>
-        <p class="note">Pour les zones plus loin comme Baguida et autres, le tarif est communiqué au cas par cas.</p>
+    <section class="section" id="offre">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">L'offre qui scotche</span>
+          <h2>Une expérience claire, pas juste un accessoire.</h2>
+        </div>
+        <div class="grid-three">
+          <article class="card feature">
+            <h3>Le kit physique</h3>
+            <p>Le support principal pour ranger, suivre et visualiser l'argent par catégories.</p>
+          </article>
+          <article class="card feature">
+            <h3>Les fiches budget</h3>
+            <p>Des pages prêtes à imprimer pour objectifs, dépenses, enveloppes et bilan mensuel.</p>
+          </article>
+          <article class="card feature">
+            <h3>La méthode Phoenix</h3>
+            <p>Une routine simple : prévoir, répartir, suivre, ajuster, progresser.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="methode">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">Phoenix Method</span>
+          <h2>Le circuit logique de vente et de transformation</h2>
+        </div>
+        <div class="timeline">
+          <div class="step"><span>1</span><div><h3>Attirer</h3><p>Statuts WhatsApp, Instagram Reels, mini démonstrations et hooks émotionnels.</p></div></div>
+          <div class="step"><span>2</span><div><h3>Rassurer</h3><p>Preuves visuelles, simplicité du kit, bénéfices concrets, témoignages clients.</p></div></div>
+          <div class="step"><span>3</span><div><h3>Convertir</h3><p>Commande WhatsApp rapide, livraison claire, offre limitée ou bonus.</p></div></div>
+          <div class="step"><span>4</span><div><h3>Fidéliser</h3><p>Suivi 7 jours, conseils d'utilisation, offre formation de groupe ou coaching.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="packs">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">Packs</span>
+          <h2>Trois niveaux simples pour vendre dès maintenant</h2>
+        </div>
+        <div class="pricing">
+          <article class="card price-card">
+            <h3>Starter</h3>
+            <div class="price">5 000 – 8 000 FCFA</div>
+            <ul>
+              <li>Kit physique</li>
+              <li>Fiches imprimables</li>
+              <li>Guide PDF</li>
+            </ul>
+          </article>
+          <article class="card price-card featured">
+            <div class="badge">À pousser en priorité</div>
+            <h3>Control Pack</h3>
+            <div class="price">10 000 – 15 000 FCFA</div>
+            <ul>
+              <li>Kit physique complet</li>
+              <li>Guide + suivi 7 jours</li>
+              <li>Message vocal d'accompagnement</li>
+            </ul>
+          </article>
+          <article class="card price-card">
+            <h3>Formation</h3>
+            <div class="price">30 000 – 50 000 FCFA</div>
+            <ul>
+              <li>Atelier collectif</li>
+              <li>Méthode budget + discipline</li>
+              <li>Plan 30 jours</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section accent">
+      <div class="container callout">
+        <div>
+          <span class="eyebrow">Anonyme aujourd'hui, autorité demain</span>
+          <h2>Construis la confiance sans montrer ton visage.</h2>
+          <p>Main caméra, voix off, capture du kit, résultats, conseils courts. Le branding fait le reste.</p>
+        </div>
+        <a href="#commande" class="btn btn-primary">Préparer le lancement</a>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">FAQ</span>
+          <h2>Réponses rapides pour lever les freins</h2>
+        </div>
+        <div class="faq">
+          <details class="card">
+            <summary>À qui s'adresse Phoenix Budget Control ?</summary>
+            <p>Étudiants, salariés, indépendants et toute personne qui veut gérer son argent simplement.</p>
+          </details>
+          <details class="card">
+            <summary>Est-ce utile même sans gros revenus ?</summary>
+            <p>Oui. La méthode est pensée pour clarifier l'argent entrant et sortant, quel que soit le niveau de revenu.</p>
+          </details>
+          <details class="card">
+            <summary>Comment commander ?</summary>
+            <p>Le plus simple : WhatsApp. Tu peux aussi rediriger vers Instagram et plus tard vers un paiement en ligne.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="commande">
+      <div class="container final-cta">
+        <h2>Prêt à lancer Neoflex Store proprement ?</h2>
+        <p>Personnalise les liens WhatsApp et Instagram, publie sur GitHub Pages, puis commence tes premières ventes.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
+            Je commande maintenant
+          </a>
+          <a href="https://instagram.com/" class="btn btn-secondary">Ajouter Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>
+        <strong>Neoflex Store</strong><br />
+        Phoenix Budget Control
+      </div>
+      <div class="footer-links">
+        <a href="#offre">Offre</a>
+        <a href="#packs">Packs</a>
+        <a href="#commande">Commander</a>
       </div>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>Paiement</h2>
-      <div class="card">
-        <p>Flooz</p>
-        <p>TMoney</p>
-        <p>Paiement à la livraison selon la zone et la commande</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap" style="text-align:center;">
-      <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
-        Je commande maintenant
-      </a>
-    </div>
-  </section>
-
-  <div class="footer">
-    Neoflex Store — Phoenix Budget Control
-  </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
