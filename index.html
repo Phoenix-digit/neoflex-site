@@ -1,80 +1,189 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Phoenix Budget Control</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phoenix Budget Control - Reprends le contrôle de ton argent." />
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: black;
-      color: white;
+      background: #0b0b0b;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      padding: 56px 24px 32px;
       text-align: center;
+      background: linear-gradient(180deg, #111111 0%, #0b0b0b 100%);
     }
-
-    header {
-      padding: 40px 20px;
+    .logo {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #111;
+      padding: 8px;
+      border: 1px solid #2b2b2b;
     }
-
     h1 {
-      color: orange;
-      font-size: 2.5em;
+      margin: 18px 0 8px;
+      font-size: 2.2rem;
+      color: #ff8c1a;
     }
-
+    .subtitle {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      color: #d7d7d7;
+      font-size: 1.05rem;
+    }
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 15px 25px;
-      background: orange;
-      color: black;
       text-decoration: none;
+      background: #ff8c1a;
+      color: #111111;
+      padding: 14px 22px;
+      border-radius: 12px;
       font-weight: bold;
-      border-radius: 5px;
     }
-
     .section {
-      padding: 40px 20px;
+      padding: 28px 0;
     }
-
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
     .card {
-      background: #111;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
+      background: #141414;
+      border: 1px solid #272727;
+      border-radius: 16px;
+      padding: 18px;
+    }
+    h2 {
+      color: #ff8c1a;
+      margin-bottom: 12px;
+    }
+    .price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ffb15c;
+    }
+    .note {
+      color: #cfcfcf;
+      font-size: 0.95rem;
+    }
+    .footer {
+      padding: 32px 24px 50px;
+      text-align: center;
+      color: #a9a9a9;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 8px 0 0;
     }
   </style>
 </head>
 <body>
+  <section class="hero">
+    <div class="wrap">
+      <img src="logo.png" alt="Logo Phoenix Budget Control" class="logo" />
+      <h1>Phoenix Budget Control</h1>
+      <p class="subtitle">
+        Reprends le contrôle de ton argent avec un kit physique simple,
+        pratique et pensé pour t’aider à mieux organiser ton budget.
+      </p>
+      <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
+        Commander sur WhatsApp
+      </a>
+    </div>
+  </section>
 
-<header>
-  <h1>Phoenix Budget Control</h1>
-  <p>Reprends le contrôle de ton argent 🔥</p>
-  <a class="btn" href="https://wa.me/22870613738">Commander sur WhatsApp</a>
-</header>
+  <section class="section">
+    <div class="wrap">
+      <h2>Pourquoi ce kit ?</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Tu gagnes de l’argent</strong>
+          <p>Mais tu ne sais pas toujours où il part.</p>
+        </div>
+        <div class="card">
+          <strong>Tu veux épargner</strong>
+          <p>Mais tu touches souvent à l’argent prévu.</p>
+        </div>
+        <div class="card">
+          <strong>Tu veux un système simple</strong>
+          <p>Sans application compliquée au départ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="section">
-  <div class="card">
-    <h2>Le problème</h2>
-    <p>Tu gagnes de l’argent mais tu ne sais pas où il part ?</p>
+  <section class="section">
+    <div class="wrap">
+      <h2>Nos offres</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="price">Standard — 8 000 FCFA</div>
+          <ul>
+            <li>Sac planner</li>
+            <li>Fiches budget</li>
+            <li>Guide Phoenix</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="price">Premium — 12 000 FCFA</div>
+          <ul>
+            <li>Sac planner</li>
+            <li>Fiches complètes</li>
+            <li>Guide Phoenix</li>
+            <li>Bonus organisation avancée</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Livraison</h2>
+      <div class="card">
+        <p>Gratuite pour les 10 premiers clients</p>
+        <p>Adidogomé : 500 FCFA</p>
+        <p>Lomé : 1000 FCFA</p>
+        <p class="note">Pour les zones plus loin comme Baguida et autres, le tarif est communiqué au cas par cas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Paiement</h2>
+      <div class="card">
+        <p>Flooz</p>
+        <p>TMoney</p>
+        <p>Paiement à la livraison selon la zone et la commande</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="text-align:center;">
+      <a class="btn" href="https://wa.me/22870613738?text=Bonjour%20je%20veux%20commander%20le%20Phoenix%20Budget%20Control">
+        Je commande maintenant
+      </a>
+    </div>
+  </section>
+
+  <div class="footer">
+    Neoflex Store — Phoenix Budget Control
   </div>
-
-  <div class="card">
-    <h2>La solution</h2>
-    <p>Un système simple pour organiser ton argent et éviter les fins de mois difficiles.</p>
-  </div>
-
-  <div class="card">
-    <h2>Le kit</h2>
-    <p>Sac + enveloppes + fiches + méthode Phoenix</p>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Disponible à Lomé</h2>
-  <p>Livraison rapide 🚀</p>
-  <a class="btn" href="https://wa.me/22870613738">Commander sur WhatsApp</a>
-</div>
-
 </body>
 </html>
