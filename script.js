@@ -50,19 +50,35 @@
     totalDisplay.textContent = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
 
     const lines = [
-      'Bonjour Neoflex Store,',
-      '',
-      'Je souhaite commander le Phoenix Budget Control.',
-      '',
-      `Pack : ${packName} — ${formatFcfa(packPrice)}`,
-      `Paiement : ${payment}`,
-      `Livraison : ${deliveryPrice === null ? deliveryName + ' — à discuter' : deliveryName + ' — ' + formatFcfa(deliveryPrice)}`,
-      `Total estimé : ${total === null ? 'à confirmer sur WhatsApp' : formatFcfa(total)}`,
-      '',
-      `Nom : ${name}`,
-      `Quartier / Zone : ${area}`,
-      `Numéro : ${phone}`
-    ];
+  'Bonjour Neoflex Store,',
+  '',
+  'Je souhaite commander le Phoenix Budget Control.',
+  '',
+  '=== DÉTAILS COMMANDE ===',
+  `Pack : ${packName} — ${formatFcfa(packPrice)}`,
+  `Paiement : ${payment}`,
+  `Livraison : ${deliveryLabel}`,
+  `Total estimé : ${totalLabel}`,
+  '',
+  '=== INFORMATIONS CLIENT ===',
+  `Nom : ${name}`,
+  `Zone : ${area}`,
+  `Numéro : ${phone}`
+];
+
+if (packName === 'Premium' && expenses) {
+  lines.push(`Chefs de dépense : ${expenses}`);
+}
+
+if (note) {
+  lines.push('', `Note : ${note}`);
+}
+
+lines.push(
+  '',
+  'Je confirme vouloir passer commande immédiatement.',
+  'Merci de me confirmer la disponibilité pour procéder au paiement.'
+);
 
     if (packName === 'Premium' && expenses) {
       lines.push(`Chefs de dépense : ${expenses}`);
@@ -74,7 +90,7 @@
 
     lines.push('', 'Je confirme vouloir passer commande.', 'Merci de me confirmer la disponibilité.');
 
-    const message = lines.join('\\n');
+    const message = lines.join('\n');
     messagePreview.textContent = message;
     return message;
   }
