@@ -1,87 +1,103 @@
-const whatsappNumber = "22870613738";
+const WHATSAPP_NUMBER = "22870613738";// Remplace par ton numéro WhatsApp Business sans + ni espaces
 
-const packSelect = document.getElementById("packSelect");
-const paymentSelect = document.getElementById("paymentSelect");
-const deliverySelect = document.getElementById("deliverySelect");
-const customerName = document.getElementById("customerName");
-const customerArea = document.getElementById("customerArea");
-const customerPhone = document.getElementById("customerPhone");
-const totalDisplay = document.getElementById("totalDisplay");
-const generateWhatsAppBtn = document.getElementById("generateWhatsAppBtn");
+    const packSelect = document.getElementById('packSelect');
+    const paymentSelect = document.getElementById('paymentSelect');
+    const deliverySelect = document.getElementById('deliverySelect');
+    const customerName = document.getElementById('customerName');
+    const customerArea = document.getElementById('customerArea');
+    const customerPhone = document.getElementById('customerPhone');
+    const premiumExpenses = document.getElementById('premiumExpenses');
+    const premiumExpenseField = document.getElementById('premiumExpenseField');
+    const customerNote = document.getElementById('customerNote');
 
-function formatPrice(value) {
-  return new Intl.NumberFormat("fr-FR").format(value) + " FCFA";
-}
+    const summaryPack = document.getElementById('summaryPack');
+    const summaryPayment = document.getElementById('summaryPayment');
+    const summaryDelivery = document.getElementById('summaryDelivery');
+    const totalDisplay = document.getElementById('totalDisplay');
+    const messagePreview = document.getElementById('messagePreview');
 
-function getCurrentOrderData() {
-  const [packName, packPriceRaw] = packSelect.value.split("|");
-  const [deliveryName, deliveryPriceRaw] = deliverySelect.value.split("|");
+    function formatFcfa(value) {
+      return new Intl.NumberFormat('fr-FR').format(value) + ' FCFA';
+    }
 
-  const packPrice = Number(packPriceRaw);
+    function togglePremiumField() {
+      const [packName] = packSelect.value.split('|');
+      const isPremium = packName === 'Premium';
 
-  let totalText = "";
-  let deliveryText = deliveryName;
+      premiumExpenseField.classList.toggle('hidden', !isPremium);
 
-  if (deliveryPriceRaw === "discuter") {
-    totalText = formatPrice(packPrice) + " + livraison à confirmer";
-  } else {
-    const deliveryPrice = Number(deliveryPriceRaw);
-    totalText = formatPrice(packPrice + deliveryPrice);
-  }
+      if (!isPremium) {
+        premiumExpenses.value = '';
+      }
+    }
 
-  return {
-    packName,
-    packPrice,
-    payment: paymentSelect.value,
-    deliveryName: deliveryText,
-    deliveryPriceRaw,
-    totalText
-  };
-}
+    function buildMessage() {
+      const [packName, packPriceRaw] = packSelect.value.split('|');
+      const [deliveryName, deliveryPriceRaw] = deliverySelect.value.split('|');
+      const payment = paymentSelect.value;
+      const name = customerName.value.trim() || 'À préciser';
+      const area = customerArea.value.trim() || 'À préciser';
+      const phone = customerPhone.value.trim() || 'À préciser';
+      const expenses = premiumExpenses.value.trim();
+      const note = customerNote.value.trim();
 
-function updateTotal() {
-  const data = getCurrentOrderData();
-  totalDisplay.textContent = data.totalText;
-}
+      const packPrice = Number(packPriceRaw || 0);
+      const deliveryPrice = deliveryPriceRaw === 'discuter' ? null : Number(deliveryPriceRaw || 0);
+      const total = deliveryPrice === null ? null : packPrice + deliveryPrice;
 
-function generateWhatsAppMessage() {
-  const data = getCurrentOrderData();
+      summaryPack.textContent = `${packName} — ${formatFcfa(packPrice)}`;
+      summaryPayment.textContent = payment;
+      summaryDelivery.textContent = deliveryPrice === null
+        ? `${deliveryName} — à discuter`
+        : `${deliveryName} — ${formatFcfa(deliveryPrice)}`;
+      totalDisplay.textContent = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
 
-  const name = customerName.value.trim() || "À compléter";
-  const area = customerArea.value.trim() || "À compléter";
-  const phone = customerPhone.value.trim() || "À compléter";
+      const lines = [
+        'Bonjour Neoflex Store ',
+        '',
+        'Je souhaite commander le Phoenix Budget Control.',
+        '',
+        `Pack : ${packName} — ${formatFcfa(packPrice)}`,
+        `Paiement : ${payment}`,
+        `Livraison : ${deliveryPrice === null ? deliveryName + ' — à discuter' : deliveryName + ' — ' + formatFcfa(deliveryPrice)}`,
+        `Total estimé : ${total === null ? 'à confirmer sur WhatsApp' : formatFcfa(total)}`,
+        '',
+        `Nom : ${name}`,
+        `Quartier / Zone : ${area}`,
+        `Numéro : ${phone}`
+      ];
 
-  let deliveryLine = data.deliveryName;
-  if (data.deliveryPriceRaw !== "discuter") {
-    const deliveryPrice = Number(data.deliveryPriceRaw);
-    deliveryLine += " — " + formatPrice(deliveryPrice);
-  } else {
-    deliveryLine += " — tarif à confirmer";
-  }
+      if (note) {
+        lines.push(`Note : ${note}`);
+      }
 
-  const message =
-`Bonjour Neoflex Store,
-je veux commander le Phoenix Budget Control.
+      lines.push('', ' Je confirme vouloir passer commande.', 'Merci de me confirmer la disponibilité.');
 
-Pack : ${data.packName} — ${formatPrice(data.packPrice)}
-Paiement : ${data.payment}
-Livraison : ${deliveryLine}
-Total estimé : ${data.totalText}
+      const message = lines.join('\n');
+      messagePreview.textContent = message;
+      return message;
+    }
 
-Nom : ${name}
-Quartier / Zone : ${area}
-Numéro : ${phone}`;
+    function openWhatsApp() {
+      const message = buildMessage();
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
 
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-}
+    function copyMessage() {
+      const message = buildMessage();
+      navigator.clipboard.writeText(message).then(() => {
+        const button = document.getElementById('copyMessageBtn');
+        const initial = button.textContent;
+        button.textContent = 'Message copié';
+        setTimeout(() => button.textContent = initial, 1800);
+      });
+    }
 
-if (packSelect && paymentSelect && deliverySelect && totalDisplay && generateWhatsAppBtn) {
-  updateTotal();
+    [packSelect, paymentSelect, deliverySelect, customerName, customerArea, customerPhone, customerNote]
+      .forEach((el) => el.addEventListener('input', buildMessage));
 
-  packSelect.addEventListener("change", updateTotal);
-  deliverySelect.addEventListener("change", updateTotal);
-  paymentSelect.addEventListener("change", updateTotal);
+    document.getElementById('generateWhatsAppBtn').addEventListener('click', openWhatsApp);
+    document.getElementById('copyMessageBtn').addEventListener('click', copyMessage);
 
-  generateWhatsAppBtn.addEventListener("click", generateWhatsAppMessage);
-}
+    buildMessage();
