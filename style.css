@@ -945,3 +945,31 @@
   background: rgba(244,180,0,.5);
   border-radius: 2px;
 }
+
+input[type="checkbox"] {
+  width: auto;
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 6px;
+  accent-color: var(--accent);
+  background: #fff;
+  margin-right: 8px;
+  vertical-align: middle;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+.personalize-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.personalize-label {
+  color: #b7bfca;
+  font-weight: 600;
+  font-size: 1.05rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+}

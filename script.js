@@ -9,6 +9,8 @@
   const premiumExpenses = document.getElementById('premiumExpenses');
   const premiumExpenseField = document.getElementById('premiumExpenseField');
   const customerNote = document.getElementById('customerNote');
+  const personalizationCheckbox = document.getElementById('personalizationCheckbox');
+  const videoPopup = document.getElementById('videoPopup');
 
   const summaryPack = document.getElementById('summaryPack');
   const summaryPayment = document.getElementById('summaryPayment');
@@ -38,57 +40,55 @@
     const expenses = premiumExpenses ? premiumExpenses.value.trim() : '';
     const note = customerNote.value.trim();
 
-    const packPrice = Number(packPriceRaw || 0);
+    let packPrice = Number(packPriceRaw || 0);
+    const personalizationPrice = 3500;
     const deliveryPrice = deliveryPriceRaw === 'discuter' ? null : Number(deliveryPriceRaw || 0);
-    const total = deliveryPrice === null ? null : packPrice + deliveryPrice;
+    let total = deliveryPrice === null ? null : packPrice + deliveryPrice;
 
-    summaryPack.textContent = `${packName} — ${formatFcfa(packPrice)}`;
+    let personalizationApplied = false;
+    if (personalizationCheckbox && personalizationCheckbox.checked) {
+      packPrice += personalizationPrice;
+      personalizationApplied = true;
+      total = deliveryPrice === null ? null : packPrice + deliveryPrice;
+    }
+
+    const deliveryLabel = deliveryPrice === null ? `${deliveryName} — à discuter` : `${deliveryName} — ${formatFcfa(deliveryPrice)}`;
+    const totalLabel = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
+
+    summaryPack.textContent = `${packName} — ${formatFcfa(packPrice)}` + (personalizationApplied ? ' (perso)' : '');
     summaryPayment.textContent = payment;
-    summaryDelivery.textContent = deliveryPrice === null
-      ? `${deliveryName} — à discuter`
-      : `${deliveryName} — ${formatFcfa(deliveryPrice)}`;
-    totalDisplay.textContent = total === null ? 'À confirmer sur WhatsApp' : formatFcfa(total);
+    summaryDelivery.textContent = deliveryLabel;
+    totalDisplay.textContent = totalLabel;
 
     const lines = [
-  'Bonjour Neoflex Store,',
-  '',
-  'Je souhaite commander le Phoenix Budget Control.',
-  '',
-  '=== DÉTAILS COMMANDE ===',
-  `Pack : ${packName} — ${formatFcfa(packPrice)}`,
-  `Paiement : ${payment}`,
-  `Livraison : ${deliveryLabel}`,
-  `Total estimé : ${totalLabel}`,
-  '',
-  '=== INFORMATIONS CLIENT ===',
-  `Nom : ${name}`,
-  `Zone : ${area}`,
-  `Numéro : ${phone}`
-];
-
-if (packName === 'Premium' && expenses) {
-  lines.push(`Chefs de dépense : ${expenses}`);
-}
-
-if (note) {
-  lines.push('', `Note : ${note}`);
-}
-
-lines.push(
-  '',
-  'Je confirme vouloir passer commande immédiatement.',
-  'Merci de me confirmer la disponibilité pour procéder au paiement.'
-);
+      'Bonjour Neoflex Store,',
+      '',
+      'Commande: Phoenix Budget Control',
+      `Pack: ${packName} (${formatFcfa(packPrice)})`,
+      `Paiement: ${payment}`,
+      `Livraison: ${deliveryLabel}`,
+      `Total: ${totalLabel}`,
+      '',
+      `Client: ${name} - ${area} - ${phone}`
+    ];
 
     if (packName === 'Premium' && expenses) {
-      lines.push(`Chefs de dépense : ${expenses}`);
+      lines.push(`Dépenses: ${expenses}`);
     }
 
     if (note) {
-      lines.push(`Note : ${note}`);
+      lines.push(`Note: ${note}`);
     }
 
-    lines.push('', 'Je confirme vouloir passer commande.', 'Merci de me confirmer la disponibilité.');
+    if (personalizationApplied) {
+      lines.push('Personnalisation: Oui (+3 500 FCFA)');
+    }
+
+    lines.push(
+      '',
+      'Je confirme la commande.',
+      'Merci de confirmer disponibilité pour paiement.'
+    );
 
     const message = lines.join('\n');
     messagePreview.textContent = message;
@@ -164,7 +164,7 @@ lines.push(
     });
   }
 
-  [packSelect, paymentSelect, deliverySelect, customerName, customerArea, customerPhone, premiumExpenses, customerNote]
+  [packSelect, paymentSelect, deliverySelect, customerName, customerArea, customerPhone, premiumExpenses, customerNote, personalizationCheckbox]
     .filter(Boolean)
     .forEach((el) => el.addEventListener('input', buildMessage));
 
@@ -172,6 +172,15 @@ lines.push(
     packSelect.addEventListener('change', () => {
       togglePremiumField();
       buildMessage();
+    });
+  }
+
+  if (packSelect && videoPopup) {
+    packSelect.addEventListener('mouseenter', () => {
+      videoPopup.classList.remove('hidden');
+    });
+    packSelect.addEventListener('mouseleave', () => {
+      videoPopup.classList.add('hidden');
     });
   }
 
